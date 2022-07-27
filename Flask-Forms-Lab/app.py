@@ -32,10 +32,11 @@ def home():
   
 @app.route('/friend_exists.html/<string:name>', methods=['GET', 'POST'])  # '/' for the default page
 def friends(name):
-	if name in facebook_friends:
-		return render_template('friend_exists.html', n = name, bool = True)
-	else:
-		return render_template('friend_exists.html', n = name, bool = False)
+	if request.method == 'GET':
+		if name in facebook_friends:
+			return render_template('friend_exists.html', n = name, bool = "true")
+		else:
+			return render_template('friend_exists.html', n = name, bool = "false")
 
 
 if __name__ == "__main__":  # Makes sure this is the main process
